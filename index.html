@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Elite - Excelência em Artes Marciais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --secondary: #FFD700;
+            --dark: #0A0A0A;
+            --darker: #000000;
+            --light: #FFFFFF;
+            --gray: #8B8B8B;
+            --card-bg: #121212;
+            --border-color: #2A2A2A;
+            --success: #00C851;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--light);
+            background-color: var(--darker);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            color: var(--light);
+        }
+
+        .section-title h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--light);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-cta:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 180px;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 18px 40px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: transparent;
+            color: var(--light);
+            padding: 18px 40px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 4rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light);
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Martial Arts */
+        .arts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .art-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .art-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+        }
+
+        .art-image {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .art-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .art-card:hover .art-image img {
+            transform: scale(1.1);
+        }
+
+        .art-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+
+        .art-tag {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .art-content {
+            padding: 25px;
+        }
+
+        .art-content h3 {
+            color: var(--light);
+            margin-bottom: 15px;
+        }
+
+        .art-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .art-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .art-features li i {
+            color: var(--secondary);
+        }
+
+        /* Trainers */
+        .trainers {
+            background-color: var(--dark);
+            position: relative;
+        }
+
+        .trainers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1627483298235-f3bac2567c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+        }
+
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .trainer-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .trainer-image {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trainer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trainer-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .trainer-specialty {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trainer-belt {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .trainer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .trainer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark);
+            border-radius: 4px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .trainer-social a:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Schedule */
+        .schedule-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .schedule-header {
+            display: grid;
+            grid-template-columns: 100px repeat(7, 1fr);
+            background-color: var(--primary);
+            color: var(--light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .schedule-header div {
+            padding: 20px 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .schedule-header div:last-child {
+            border-right: none;
+        }
+
+        .schedule-body {
+            display: grid;
+            grid-template-columns: 100px repeat(7, 1fr);
+        }
+
+        .time-slot {
+            padding: 20px 10px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .time-slot:last-child {
+            border-right: none;
+        }
+
+        .schedule-class {
+            padding: 20px 10px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .schedule-class:hover {
+            background-color: rgba(196, 30, 58, 0.1);
+        }
+
+        .schedule-class:last-child {
+            border-right: none;
+        }
+
+        .class-name {
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .class-trainer {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .class-level {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Membership */
+        .membership-cards {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .membership-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .membership-card.featured {
+            border: 2px solid var(--primary);
+            transform: translateY(-20px);
+        }
+
+        .membership-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .membership-card.featured:hover {
+            transform: translateY(-30px);
+        }
+
+        .membership-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 8px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .membership-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--light);
+            margin: 20px 0;
+        }
+
+        .membership-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .membership-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .membership-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .membership-features li i {
+            color: var(--success);
+        }
+
+        /* Contact */
+        .contact-container {
+            display: flex;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding-top: 80px;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--light);
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+            border-color: #25D366;
+        }
+
+        .instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border: none;
+        }
+
+        .maps {
+            background-color: #4285F4;
+            border-color: #4285F4;
+        }
+
+        .footer-bottom {
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .schedule-header, .schedule-body {
+                grid-template-columns: 80px repeat(7, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                flex-direction: column;
+                padding: 30px;
+                text-align: center;
+                gap: 25px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                border-top: 1px solid var(--primary);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .membership-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .membership-card {
+                max-width: 100%;
+            }
+            
+            .membership-card.featured {
+                transform: translateY(0);
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .schedule-header, .schedule-body {
+                grid-template-columns: 60px repeat(7, 1fr);
+                font-size: 0.8rem;
+            }
+            
+            .time-slot, .schedule-class {
+                padding: 15px 5px;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .stat-item::after {
+                display: none;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding-top: 150px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .schedule-container {
+                overflow-x: auto;
+            }
+            
+            .schedule-header, .schedule-body {
+                min-width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">Dojo<span>Elite</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#arts">Artes Marciais</a></li>
+                <li><a href="#trainers">Instrutores</a></li>
+                <li><a href="#schedule">Horários</a></li>
+                <li><a href="#membership">Planos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            
+            <a href="#contact" class="header-cta">
+                <i class="fas fa-fist-raised"></i>
+                Matricule-se
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle">Academia de Artes Marciais</div>
+                <h1 class="hero-title">Forja o <span>Guerreiro</span> que Há em Você</h1>
+                <p class="hero-description">No Dojo Elite, cultivamos não apenas habilidades de combate, mas também disciplina, respeito e autoconfiança. Descubra seu potencial máximo com instrutores de nível mundial e metodologia comprovada.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendar Aula Experimental
+                    </a>
+                    <a href="#arts" class="btn-secondary">
+                        <i class="fas fa-arrow-right"></i>
+                        Conhecer Modalidades
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">18+</span>
+                        <span class="stat-label">Anos de Experiência</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Modalidades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25</span>
+                        <span class="stat-label">Instrutores</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2k+</span>
+                        <span class="stat-label">Alunos Formados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Martial Arts Section -->
+    <section id="arts" class="arts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Artes Marciais</h2>
+                <p>Domine diversas modalidades com nossos mestres especializados</p>
+            </div>
+            
+            <div class="arts-grid">
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Jiu-Jitsu">
+                        <div class="art-overlay">
+                            <span class="art-tag">Grappling</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>Jiu-Jitsu Brasileiro</h3>
+                        <p>A arte suave que utiliza alavancas e técnicas de submissão para controlar oponentes maiores.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Técnicas de chão</li>
+                            <li><i class="fas fa-check"></i> Finalizações</li>
+                            <li><i class="fas fa-check"></i> Defesa pessoal</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Muay Thai">
+                        <div class="art-overlay">
+                            <span class="art-tag">Striking</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>Muay Thai</h3>
+                        <p>A arte das oito armas: punhos, cotovelos, joelhos e canelas em combate completo.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Técnicas de chutes</li>
+                            <li><i class="fas fa-check"></i> Clinch e joelhadas</li>
+                            <li><i class="fas fa-check"></i> Condicionamento físico</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1627483298235-f3bac2567c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Boxe">
+                        <div class="art-overlay">
+                            <span class="art-tag">Boxe</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>Boxe</h3>
+                        <p>A nobre arte do pugilismo, desenvolvendo velocidade, precisão e potência nos golpes.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Esquivas e defesas</li>
+                            <li><i class="fas fa-check"></i> Combinações de golpes</li>
+                            <li><i class="fas fa-check"></i> Footwork avançado</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1594911479017-89eb76ae1c02?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Judô">
+                        <div class="art-overlay">
+                            <span class="art-tag">Grappling</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>Judô</h3>
+                        <p>Arte marcial japonesa focada em projeções e técnicas de imobilização no solo.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Quedas e projeções</li>
+                            <li><i class="fas fa-check"></i> Imobilizações</li>
+                            <li><i class="fas fa-check"></i> Filosofia marcial</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Krav Maga">
+                        <div class="art-overlay">
+                            <span class="art-tag">Defesa Pessoal</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>Krav Maga</h3>
+                        <p>Sistema de defesa pessoal israelense eficiente e direto para situações reais de perigo.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Defesa contra armas</li>
+                            <li><i class="fas fa-check"></i> Técnicas de imobilização</li>
+                            <li><i class="fas fa-check"></i> Situações reais</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="art-card">
+                    <div class="art-image">
+                        <img src="https://images.unsplash.com/photo-1610557891899-1b6c0d2c7cc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="MMA">
+                        <div class="art-overlay">
+                            <span class="art-tag">Combate Completo</span>
+                        </div>
+                    </div>
+                    <div class="art-content">
+                        <h3>MMA</h3>
+                        <p>Treinamento completo de mixed martial arts, integrando todas as áreas do combate.</p>
+                        <ul class="art-features">
+                            <li><i class="fas fa-check"></i> Integração de artes</li>
+                            <li><i class="fas fa-check"></i> Sparring controlado</li>
+                            <li><i class="fas fa-check"></i> Preparação para competição</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="trainers" class="trainers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Mestres</h2>
+                <p>Instrutores certificados com experiência em competições internacionais</p>
+            </div>
+            
+            <div class="trainers-grid">
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mestre Carlos">
+                    </div>
+                    <div class="trainer-info">
+                        <h3>Carlos Mendes</h3>
+                        <span class="trainer-specialty">Jiu-Jitsu & MMA</span>
+                        <p>Faixa preta 4° grau em BJJ, campeão mundial em 2018 e 2020.</p>
+                        <div class="trainer-belt">Faixa Preta 4°</div>
+                        <div class="trainer-social">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <img src="https://images.unsplash.com/photo-1598974357801-cbca100e5d10?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mestra Ana">
+                    </div>
+                    <div class="trainer-info">
+                        <h3>Ana Silva</h3>
+                        <span class="trainer-specialty">Muay Thai & Boxe</span>
+                        <p>Campeã nacional de Muay Thai por 5 anos consecutivos, instrutora certificada pela IFMA.</p>
+                        <div class="trainer-belt">Instrutora Certificada</div>
+                        <div class="trainer-social">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trainer-card">
+                    <div class="trainer-image">
+                        <img src="https://images.unsplash.com/photo-1608245445519-d7b2c6c7d5e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mestre Takashi">
+                    </div>
+                    <div class="trainer-info">
+                        <h3>Takashi Yamada</h3>
+                        <span class="trainer-specialty">Judô & Aikido</span>
+                        <p>6° dan em Judô, medalhista olímpico e instrutor com 25 anos de experiência.</p>
+                        <div class="trainer-belt">6° Dan Judô</div>
