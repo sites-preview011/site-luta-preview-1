@@ -1,5 +1,0 @@
-ID=site-luta-model-1.discloud.app
-TYPE=site
-MAIN=index.js
-NAME=SITE LUTA MODELO 1
-RAM=120
